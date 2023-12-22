@@ -1,0 +1,63 @@
+options:
+  max-time: 20
+  size: 2x
+
+definitions:
+  steps:
+    - step: &flutter-pub-get-analyze
+        name: Flutter check code
+        runs-on:
+          - 'self.hosted'
+          - 'macos'
+        script:
+          - flutter pub global run get_cli:get generate locales assets/locales
+          - flutter packages pub run build_runner build --delete-conflicting-outputs
+          - flutter analyze --fatal-infos --fatal-warnings
+
+pipelines:
+  pull-requests:
+    "**":
+      - step: *flutter-pub-get-analyze
+  branches:
+    "release/**":
+      - parallel:
+          steps:
+            - step:
+                name: "Flutter build ipa"
+                runs-on:
+                  - 'self.hosted'
+                  - 'macos'
+                  - 'second'
+                script:
+                  - echo "Generate data"
+                  - flutter pub global run get_cli:get generate locales assets/locales
+                  - flutter packages pub run build_runner build --delete-conflicting-outputs
+                  - BITBUCKET_VERSION=$(echo $BITBUCKET_BRANCH | cut -d '/' -f 2)
+                  - echo "Version"
+                  - echo ${BITBUCKET_BUILD_NUMBER}
+                  - echo ${BITBUCKET_VERSION}
+                  - echo "Build ipa"
+                  - flutter build ipa --build-name=${BITBUCKET_VERSION} --build-number=${BITBUCKET_BUILD_NUMBER}
+                  - xcrun altool --upload-app --type ios -f build/ios/ipa/*.ipa --apiKey V46S9JM4UA --apiIssuer 87875724-02c5-490c-a2d2-99acf8a669d8
+                artifacts:
+                  - build/ios/ipa/*.ipa
+            - step:
+                name: "Flutter build apk"
+                runs-on:
+                  - 'self.hosted'
+                  - 'macos'
+                script:
+                  - echo "Generate data"
+                  - flutter pub global run get_cli:get generate locales assets/locales
+                  - flutter packages pub run build_runner build --delete-conflicting-outputs
+                  - BITBUCKET_VERSION=$(echo $BITBUCKET_BRANCH | cut -d '/' -f 2)
+                  - echo "Version"
+                  - echo ${BITBUCKET_BUILD_NUMBER}
+                  - echo ${BITBUCKET_VERSION}
+                  - echo "Setup key"
+                  - echo $RELEASE_JKS_FILE_BASE64 | base64 -d > store.jks
+                  - echo "Build apk"
+                  - flutter build appbundle --build-name=${BITBUCKET_VERSION} --build-number=${BITBUCKET_BUILD_NUMBER}
+                  - firebase appdistribution:distribute build/app/outputs/bundle/release/app-release.aab --app "1:904555385413:android:5312797c7e34349f11892c" --groups "spadar-android" --token ${FIREBASE_TOKEN}
+                artifacts:
+                  - build/app/outputs/bundle/release/app-release.aab
