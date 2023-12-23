@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "252364513765",
+    "project_id": "spadarstva-ce2f4",
+    "storage_bucket": "spadarstva-ce2f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252364513765:android:3418aaee201b6701eb8f0c",
+        "android_client_info": {
+          "package_name": "com.spadarstva.spadarstva"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252364513765-75chsi0j9bdgon5lvqjcsq8qrqg17bfa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spadarstva.spadarstva",
+            "certificate_hash": "c23cb528135cdc050cc6f7aaca66a7d571b6c368"
+          }
+        },
+        {
+          "client_id": "252364513765-k236q3g9pdc7i2ruaphhpb8cm7frn6do.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbpOeO5mB_RguvT1vh9MfEWnrxAxNgSQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252364513765-k236q3g9pdc7i2ruaphhpb8cm7frn6do.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "252364513765-afvekgrja40829th0u7s7jf7kamqlmo5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.spadarstva.spadarstva"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

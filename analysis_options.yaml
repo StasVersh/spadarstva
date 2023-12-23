@@ -1,7 +1,7 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  exclude: [build/**, lib/generated/**.g.dart, lib/app/routes/**.dart, lib/main.reflectable.dart]
+  exclude: [build/**, lib/generated/**.g.dart, lib/main.reflectable.dart]
 
 linter:
   rules:
