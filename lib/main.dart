@@ -10,6 +10,7 @@ import 'package:spadarstva/app/data/services/auth_services.dart';
 import 'package:spadarstva/app/data/services/user_services.dart';
 import 'package:spadarstva/app/routes/app_pages.dart';
 import 'package:spadarstva/core/theme/app_colors.dart';
+import 'package:spadarstva/core/values/app_values.dart';
 import 'package:spadarstva/generated/locales.g.dart';
 import 'package:spadarstva/firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,14 +22,15 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
   ]);
   var isAuthorized = Get.find<AuthServices>().isAuth();
+  var userLanguage = Get.find<UserServices>().currentUser?.settings.language;
   runApp(
     GetMaterialApp(
       title: 'Spadarstva',
       initialRoute: isAuthorized ? Routes.HOME : Routes.LOGIN,
       getPages: AppPages.routes,
-      defaultTransition: Transition.rightToLeftWithFade,
-      supportedLocales: const [Locale('ru')],
-      locale: const Locale('ru'),
+      defaultTransition: Transition.cupertino,
+      supportedLocales: AppValues.locales.map((code) => Locale(code)),
+      locale: Locale(userLanguage ?? LocaleKeys.en),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

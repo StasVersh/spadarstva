@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' hide Settings;
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:get/get.dart';
+import 'package:spadarstva/app/data/models/settings.dart';
 import 'package:spadarstva/app/data/models/user.dart';
 import 'package:spadarstva/app/data/services/auth_services.dart';
 
@@ -40,11 +41,12 @@ class UserServices extends GetxService {
   Future addUser(auth.User authUser) async {
     var doc = await userCollection.doc(authUser.uid).get();
     var userExist = doc.data() != null;
-    if(!userExist){
+    if (!userExist) {
       await userCollection.doc(authUser.uid).set(User(
           name: authUser.displayName,
           email: authUser.email,
-          photoUrl: authUser.photoURL));
+          photoUrl: authUser.photoURL,
+          settings: Settings()));
     }
   }
 

@@ -1,5 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' hide Settings;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:spadarstva/app/data/models/settings.dart';
+import 'package:spadarstva/core/utils/converters/document_serializer.dart';
+import 'package:spadarstva/core/utils/converters/settings_serializer.dart';
 
 part 'user.g.dart';
 
@@ -10,8 +13,18 @@ class User {
   String? email;
   String? name;
   String? photoUrl;
+  @DocumentSerializer()
+  DocumentReference? group;
+  @SettingsSerializer()
+  Settings settings;
 
-  User({this.uid, this.email, this.name, this.photoUrl});
+  User({
+    this.uid,
+    this.email,
+    this.name,
+    this.photoUrl,
+    required this.settings,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

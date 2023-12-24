@@ -10,30 +10,35 @@ class AuthServices extends GetxService {
   AuthServices(this.firebaseAuth);
 
   Future<bool> signInWithGoogle() async {
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
-    if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
+    try{
+      final GoogleSignInAccount? googleSignInAccount =
+      await googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
 
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
 
-      final UserCredential authResult =
-          await firebaseAuth.signInWithCredential(credential);
-      final User? user = authResult.user;
+        final UserCredential authResult =
+        await firebaseAuth.signInWithCredential(credential);
+        final User? user = authResult.user;
 
-      if(user != null){
-        await Get.find<UserServices>().addUser(user);
-        await Get.find<UserServices>()
-            .setCurrentUser(firebaseAuth.currentUser?.uid);
+        if(user != null){
+          await Get.find<UserServices>().addUser(user);
+          await Get.find<UserServices>()
+              .setCurrentUser(firebaseAuth.currentUser?.uid);
+        }
+
+        return user != null;
       }
-
-      return user != null;
+      return false;
     }
-    return false;
+    catch(_) {
+      return false;
+    }
   }
 
   bool isAuth() => firebaseAuth.currentUser != null;
@@ -43,7 +48,6 @@ class AuthServices extends GetxService {
     await googleSignIn.signOut();
   }
 
-  @override
   User? getCurrentAuthUser() => firebaseAuth.currentUser;
 
   Future delete() async {

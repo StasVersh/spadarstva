@@ -4,13 +4,13 @@ import 'package:spadarstva/core/theme/app_colors.dart';
 abstract class AppTextStyles {
   static TextStyle pageTitle = const TextStyle(
     color: AppColors.text,
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w700,
   );
   static TextStyle title = const TextStyle(
     color: AppColors.text,
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w700,
   );
@@ -19,5 +19,11 @@ abstract class AppTextStyles {
     fontSize: 14,
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w400,
+  );
+  static TextStyle regularBold = const TextStyle(
+    color: AppColors.text,
+    fontSize: 14,
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w700,
   );
 }

@@ -17,7 +17,7 @@ class PageTitle extends StatelessWidget {
           children: [
             Text(
               title,
-              style: AppTextStyles.title,
+              style: AppTextStyles.pageTitle,
             ),
             Visibility(
               visible: onPressed != null,

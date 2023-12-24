@@ -1,0 +1,15 @@
+{
+  "appName": "Spadarstva",
+  "googleSignIn": "SignIn with Google",
+  "profile": "Profile",
+  "main": "Main",
+  "members": "Members",
+  "newGroup": "Currently you don't have a group and you can't add members. Click here to create a group",
+  "other": "Other",
+  "settings": "Settings",
+  "language": "Language",
+  "en": "English",
+  "be": "Belarusian",
+  "ru": "Russian",
+  "deleteProfile": "Delete profile"
+}
