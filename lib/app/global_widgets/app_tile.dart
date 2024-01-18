@@ -5,7 +5,7 @@ import 'package:spadarstva/core/theme/app_text_styles.dart';
 class AppTile extends StatelessWidget {
   final Widget avatar;
   final String label;
-  final Widget other;
+  final Widget? other;
   final TextStyle? labelStyle;
   final Color? avatarBackgroundColor;
   final Color? selectionColor;
@@ -15,7 +15,7 @@ class AppTile extends StatelessWidget {
     super.key,
     required this.avatar,
     required this.label,
-    required this.other,
+    this.other,
     this.labelStyle,
     this.onTap,
     this.avatarBackgroundColor,
@@ -35,16 +35,19 @@ class AppTile extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: Row(
               children: [
-                CircleAvatar(
-                  backgroundColor:
-                      avatarBackgroundColor ?? AppColors.backgroundSecondary,
-                  radius: 18,
-                  child: avatar,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: CircleAvatar(
+                    backgroundColor:
+                        avatarBackgroundColor ?? AppColors.backgroundSecondary,
+                    radius: 18,
+                    child: avatar,
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Text(label, style: labelStyle ?? AppTextStyles.title),
                 const Spacer(),
-                other,
+                if (other != null) other!,
               ],
             ),
           ),

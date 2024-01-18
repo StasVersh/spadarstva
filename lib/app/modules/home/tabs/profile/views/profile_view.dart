@@ -71,27 +71,57 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                 ),
                 const SizedBox(height: 32),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    PageTitle(
-                      title: LocaleKeys.members.tr,
-                      onPressed:
-                          controller.user.value.group != null ? () {} : null,
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      borderRadius: BorderRadius.circular(16),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          LocaleKeys.newGroup.tr,
-                          style: AppTextStyles.regular,
-                          textAlign: TextAlign.center,
-                        ),
+                Obx(
+                  () => Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      PageTitle(
+                        title: LocaleKeys.members.tr,
+                        onPressed: controller.user.value.group != null
+                            ? controller.addMember
+                            : null,
                       ),
-                    )
-                  ],
+                      controller.user.value.group == null
+                          ? InkWell(
+                              highlightColor: AppColors.backgroundSecondary,
+                              onTap: controller.addGroup,
+                              borderRadius: BorderRadius.circular(16),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    style: AppTextStyles.regular,
+                                    children: [
+                                      TextSpan(
+                                          text: LocaleKeys.newGroupFirst.tr),
+                                      TextSpan(
+                                        text: LocaleKeys.newGroupSecond.tr,
+                                        style: AppTextStyles.regularBold,
+                                      ),
+                                      TextSpan(
+                                          text: LocaleKeys.newGroupThird.tr),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Column(
+                              children: List.generate(
+                                controller.groupUsers.length,
+                                (index) {
+                                  var user = controller.groupUsers[index];
+                                  return AppTile(
+                                    avatar: Image.network(user.photoUrl!),
+                                    label: user.name!,
+                                    other: const Icon(Icons.more_vert),
+                                    onTap: () => controller.memberControl(user),
+                                  );
+                                },
+                              ),
+                            ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 32),
                 Column(

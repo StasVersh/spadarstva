@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spadarstva/app/global_widgets/app_tile.dart';
 import 'package:spadarstva/app/global_widgets/default_view.dart';
-import 'package:spadarstva/app/modules/settings/controllers/settings_controller.dart';
-import 'package:spadarstva/core/theme/app_colors.dart';
+import 'package:spadarstva/app/modules/group_settings/controllers/group_settings_controller.dart';
 import 'package:spadarstva/core/theme/app_text_styles.dart';
 import 'package:spadarstva/core/values/app_values.dart';
 import 'package:spadarstva/generated/locales.g.dart';
 
-class SettingsView extends GetView<SettingsController> {
-  const SettingsView({Key? key}) : super(key: key);
+class GroupSettingsView extends GetView<GroupSettingsController> {
+  const GroupSettingsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return DefaultView(
@@ -42,7 +41,6 @@ class SettingsView extends GetView<SettingsController> {
                       elevation: 16,
                       borderRadius: BorderRadius.circular(16),
                       onChanged: controller.setLanguage,
-                      dropdownColor: AppColors.background,
                       items: AppValues.locales
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(

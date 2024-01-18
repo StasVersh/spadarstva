@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:spadarstva/core/utils/converters/document_serializer.dart';
 
 part 'group.g.dart';
 
@@ -7,9 +8,10 @@ part 'group.g.dart';
 class Group {
   @JsonKey(includeFromJson: false, includeToJson: false)
   DocumentReference? uid;
-  String? name;
+  @DocumentSerializer()
+  List<DocumentReference> users;
 
-  Group({this.uid, this.name});
+  Group({this.uid, required this.users});
 
   factory Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
 

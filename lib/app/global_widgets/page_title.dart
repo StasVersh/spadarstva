@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:spadarstva/core/theme/app_colors.dart';
 import 'package:spadarstva/core/theme/app_text_styles.dart';
 
 class PageTitle extends StatelessWidget {
   final String title;
   final Function()? onPressed;
+  final IconData? icon;
 
-  const PageTitle({super.key, required this.title, this.onPressed});
+  const PageTitle({super.key, required this.title, this.onPressed, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,14 @@ class PageTitle extends StatelessWidget {
             ),
             Visibility(
               visible: onPressed != null,
-              child: IconButton(
-                onPressed: onPressed,
-                icon: const Icon(Icons.add),
+              child: InkWell(
+                highlightColor: AppColors.backgroundSecondary,
+                borderRadius: BorderRadius.circular(10),
+                onTap: onPressed,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Icon(icon ?? Icons.add, size: 20),
+                ),
               ),
             )
           ],

@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:spadarstva/app/modules/group_settings/bindings/group_settings_binding.dart';
+import 'package:spadarstva/app/modules/group_settings/views/group_settings_view.dart';
 import 'package:spadarstva/app/modules/home/bindings/home_binding.dart';
 import 'package:spadarstva/app/modules/home/views/home_view.dart';
 import 'package:spadarstva/app/modules/login/bindings/login_binding.dart';
@@ -28,6 +30,11 @@ class AppPages {
       name: _Paths.SETTINGS,
       page: () => const SettingsView(),
       bindings: [SettingsBinding()],
+    ),
+    GetPage(
+      name: _Paths.GROUP_SETTINGS,
+      page: () => const GroupSettingsView(),
+      bindings: [GroupSettingsBinding()],
     ),
   ];
 }

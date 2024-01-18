@@ -1,15 +1,20 @@
 {
   "appName": "Spadarstva",
+  "be": "Belarusian",
+  "deleteProfile": "Delete profile",
+  "en": "English",
   "googleSignIn": "SignIn with Google",
-  "profile": "Profile",
+  "language": "Language",
   "main": "Main",
   "members": "Members",
-  "newGroup": "Currently you don't have a group and you can't add members. Click here to create a group",
+  "newGroupFirst": "Currently you don't have a group. ",
+  "newGroupSecond": "Click here ",
+  "newGroupThird": "to create a group",
   "other": "Other",
-  "settings": "Settings",
-  "language": "Language",
-  "en": "English",
-  "be": "Belarusian",
+  "profile": "Profile",
   "ru": "Russian",
-  "deleteProfile": "Delete profile"
+  "settings": "Settings",
+  "toInviteDescription": "Are you sure you want to invite this user to the group?",
+  "toInvite": "Invite",
+  "cancel": "Cancel"
 }

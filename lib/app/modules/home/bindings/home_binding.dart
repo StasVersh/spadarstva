@@ -11,10 +11,15 @@ class HomeBinding extends Binding {
         () => HomeController(),
       ),
       Bind.lazyPut<MainController>(
-            () => MainController(),
+        () => MainController(),
       ),
       Bind.lazyPut<ProfileController>(
-            () => ProfileController(Get.find(), Get.find()),
+        () => ProfileController(
+          Get.find(),
+          Get.find(),
+          Get.find(),
+          Get.find(),
+        ),
       ),
     ];
   }

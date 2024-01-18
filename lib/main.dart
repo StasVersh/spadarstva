@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,9 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:spadarstva/app/data/services/auth_services.dart';
+import 'package:spadarstva/app/data/services/group_services.dart';
+import 'package:spadarstva/app/data/services/notification_services.dart';
 import 'package:spadarstva/app/data/services/user_services.dart';
 import 'package:spadarstva/app/routes/app_pages.dart';
 import 'package:spadarstva/core/theme/app_colors.dart';
+import 'package:spadarstva/core/theme/app_text_styles.dart';
 import 'package:spadarstva/core/values/app_values.dart';
 import 'package:spadarstva/generated/locales.g.dart';
 import 'package:spadarstva/firebase_options.dart';
@@ -46,10 +48,18 @@ Future<void> main() async {
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: AppColors.background,
+        appBarTheme: const AppBarTheme(backgroundColor: AppColors.background),
+        dividerTheme: const DividerThemeData(
+          color: AppColors.backgroundSecondary,
+        ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             foregroundColor: AppColors.text,
           ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: AppTextStyles.regular,
+          border: InputBorder.none,
         ),
       ),
     ),
@@ -65,9 +75,17 @@ Future initServices() async {
     androidProvider: AndroidProvider.debug,
     appleProvider: AppleProvider.deviceCheck,
   );
-  Get.put<AuthServices>(AuthServices(FirebaseAuth.instance),
-      permanent: true);
-  await Get.put<UserServices>(UserServices(FirebaseFirestore.instance),
+  Get.put<AuthServices>(AuthServices(FirebaseAuth.instance), permanent: true);
+  await Get.put<GroupServices>(
+      GroupServices(FirebaseFirestore.instance),
       permanent: true)
+      .init();
+  await Get.put<NotificationServices>(
+      NotificationServices(FirebaseFirestore.instance),
+      permanent: true)
+      .init();
+  await Get.put<UserServices>(
+          UserServices(FirebaseFirestore.instance, FirebaseAuth.instance),
+          permanent: true)
       .init();
 }

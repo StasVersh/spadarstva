@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           backgroundColor: AppColors.background,
-          selectedItemColor: AppColors.primary,
+          selectedItemColor: AppColors.text,
           onTap: controller.onSelectPage,
           currentIndex: controller.selectedPageIndex.value,
           showUnselectedLabels: false,

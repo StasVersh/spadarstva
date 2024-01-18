@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:spadarstva/app/global_widgets/loading.dart';
 import 'package:spadarstva/core/theme/app_colors.dart';
 
 class DefaultView extends StatelessWidget {
@@ -25,17 +26,7 @@ class DefaultView extends StatelessWidget {
                   duration: const Duration(milliseconds: 150),
                   child: const ColoredBox(
                     color: Colors.white70,
-                    child: Center(
-                      child: SizedBox(
-                        height: 150,
-                        width: 150,
-                        child: LoadingIndicator(
-                          indicatorType: Indicator.ballClipRotateMultiple,
-                          colors: [AppColors.text],
-                          strokeWidth: 8,
-                        ),
-                      ),
-                    ),
+                    child: Loading(),
                   ),
                 )
               : const SizedBox.shrink(),
